@@ -1,3 +1,3 @@
-export const ADD_REMAINDER = "ADD_REMAINDER";
-export const DELETE_REMAINDER = "DELETE_REMAINDER";
+export const ADD_TASK = "ADD_TASK";
+export const DELETE_TASK = "DELETE_TASK";
 export const MOVE_TASK = "MOVE_TASK";

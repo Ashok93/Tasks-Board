@@ -1,8 +1,8 @@
-import { ADD_REMAINDER, DELETE_REMAINDER, MOVE_TASK } from "../constants";
+import { ADD_TASK, DELETE_TASK, MOVE_TASK } from "../constants";
 
-export const addRemainder = (text, dueDate) => {
+export const addTask = (text, dueDate) => {
   const action = {
-    type: ADD_REMAINDER,
+    type: ADD_TASK,
     text,
     dueDate
   }
@@ -10,9 +10,9 @@ export const addRemainder = (text, dueDate) => {
   return action;
 }
 
-export const deleteRemainder = (id, from) => {
+export const deleteTask = (id, from) => {
   const action = {
-    type: DELETE_REMAINDER,
+    type: DELETE_TASK,
     id,
     from
   }

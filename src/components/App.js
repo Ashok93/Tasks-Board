@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addRemainder, deleteRemainder, moveTask } from '../actions';
+import { addTask, deleteTask, moveTask } from '../actions';
 import moment from 'moment';
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
     }
 
     this.onChange = this.onChange.bind(this);
-    this.addRemainder = this.addRemainder.bind(this);
+    this.addTask = this.addTask.bind(this);
   }
 
   onChange(e) {
@@ -22,12 +22,12 @@ class App extends Component {
     })
   }
 
-  addRemainder(e) {
-    this.props.addRemainder(this.state.text, this.state.dueDate);
+  addTask(e) {
+    this.props.addTask(this.state.text, this.state.dueDate);
   }
 
-  deleteRemainder(id, current_task_state) {
-    this.props.deleteRemainder(id, current_task_state);
+  deleteTask(id, current_task_state) {
+    this.props.deleteTask(id, current_task_state);
   }
 
   onDragOver(e) {
@@ -48,22 +48,22 @@ class App extends Component {
 
   }
 
-  renderRemainders(current_task_state) {
-      const { remainders } = this.props;
+  renderTasks(current_task_state) {
+      const { tasks } = this.props;
       return(
         <ul className="list-group">
           {
-            remainders[current_task_state].map(remainder => {
+            tasks[current_task_state].map(task => {
               return (
-                <li key={remainder.id}
+                <li key={task.id}
                     className={ current_task_state + " list-group-item" }
                     draggable="true"
-                    onDragStart={this.onDragStart.bind(this, current_task_state, remainder)}>
-                   <div className="list-item">{remainder.text}</div>
-                   <div className="list-item delete-button" onClick={this.deleteRemainder.bind(this, remainder.id, current_task_state)}>
+                    onDragStart={this.onDragStart.bind(this, current_task_state, task)}>
+                   <div className="list-item">{task.text}</div>
+                   <div className="list-item delete-button" onClick={this.deleteTask.bind(this, task.id, current_task_state)}>
                       &#x2715;
                    </div>
-                   <div style={{fontSize: 12}}><em>{moment(new Date(remainder.dueDate)).fromNow()}</em></div>
+                   <div style={{fontSize: 12}}><em>{moment(new Date(task.dueDate)).fromNow()}</em></div>
                 </li>
               )
             })
@@ -84,7 +84,7 @@ class App extends Component {
             <input className="form-control" placeholder="I have to.." name="text" value={this.state.text} onChange={this.onChange} />
             <input className="form-control" type="date" name="dueDate" value={this.state.dueDate} onChange={this.onChange} placeholder="dd-mm-yyyy" />
           </div>
-          <button type="button" className="btn btn-success" onClick={this.addRemainder}>
+          <button type="button" className="btn btn-success" onClick={this.addTask}>
             Add Task
           </button>
         </div>
@@ -93,19 +93,19 @@ class App extends Component {
             <div className="tasks_status_header">
               TODO
             </div>
-              { this.renderRemainders("todo_tasks") }
+              { this.renderTasks("todo_tasks") }
           </div>
           <div className="in_progress" data-name="in_progress_tasks" onDragOver={this.onDragOver.bind(this)} onDrop={this.onDrop.bind(this)}>
             <div className="tasks_status_header">
               IN PROGRESS
             </div>
-            { this.renderRemainders("in_progress_tasks") }
+            { this.renderTasks("in_progress_tasks") }
           </div>
           <div className="completed" data-name="completed_tasks" onDragOver={this.onDragOver.bind(this)} onDrop={this.onDrop.bind(this)}>
             <div className="tasks_status_header">
               COMPLETED
             </div>
-            { this.renderRemainders("completed_tasks") }
+            { this.renderTasks("completed_tasks") }
           </div>
         </div>
       </div>
@@ -115,8 +115,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    remainders: state
+    tasks: state
   }
 }
 
-export default connect(mapStateToProps, { addRemainder, deleteRemainder, moveTask }) (App);
+export default connect(mapStateToProps, { addTask, deleteTask, moveTask }) (App);
