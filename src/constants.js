@@ -1,2 +1,3 @@
 export const ADD_REMAINDER = "ADD_REMAINDER";
 export const DELETE_REMAINDER = "DELETE_REMAINDER";
+export const MOVE_TASK = "MOVE_TASK";

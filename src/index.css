@@ -1,8 +1,12 @@
+body {
+    height: 100vh;
+    background-color: cornflowerblue;
+}
+
 .App {
   padding-top: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .title {
@@ -12,15 +16,36 @@
 
 .remainder-form {
   padding: 5px;
+  text-align: center;
 }
 
 .list-item {
   display: inline-block;
+  font-weight: bold;
 }
 
 .delete-button {
   float: right;
   padding-right: 5px;
+}
+
+.todo, .in_progress, .completed {
+  float: left;
+  width: 30%;
+  min-height: 300px;
+  margin: 15px;
+  border: 1px solid;
+}
+
+.list-group-item {
+  background-color: cornflowerblue;
+  border-radius: 20px !important;
+}
+
+.tasks_status_header {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
 }
 
 input{
