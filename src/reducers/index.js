@@ -33,20 +33,20 @@ const moveTask = (state, action) => {
   });
   var the_task_copy = Object.assign({}, task_to_move);
 
-  state[action.to].push(the_task_copy);
-
   current_tasks = current_tasks.filter(task => {
     return task.id != action.id;
   });
 
   state[action.from] = current_tasks;
+  state[action.to].push(the_task_copy);
+
 
   return state;
 }
 
 const tasks = (state = initial_state, action) => {
   let task = null;
-  
+
   if(Object.keys(read_cookie('tasks')).length != 0)
     state = read_cookie('tasks')
 
